@@ -1,0 +1,30 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "cSpell.enabled": true,
+  "cSpell.language": "en,uk",
+  "cSpell.spellCheckDelayMs": 500,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "cSpell.words": [
+    "Nuxt",
+    "Pinia",
+    "Nitro",
+    "ofetch",
+    "jsonwebtoken",
+    "bcrypt",
+    "readBody",
+    "composable",
+    "middleware"
+  ]
+}

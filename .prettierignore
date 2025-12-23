@@ -1,0 +1,13 @@
+# Системні папки
+.nuxt
+.output
+node_modules
+dist
+
+# Файли логів
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Публічні статичні файли (зазвичай не потребують форматування)
+public/
