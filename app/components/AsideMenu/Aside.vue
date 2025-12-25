@@ -1,73 +1,108 @@
 <template>
-  <div class="wrapper" >
-    <nav
-      class="aside_container_menu border-r-2 border-grey"
+  <aside 
+    class="sidebar-container min-h-screen relative" 
+    :class="[asideMenu.isSidebarOpen ? 'w-64' : 'w-20']" 
+    :data-expanded="asideMenu.isSidebarOpen"
+    
     >
-      <div >
-        <div v-if="asideMenu.isSidebarOpen">
-          <Icon name="ep:minus" @click="asideMenu.toggleSidebar()"/>
-          <!-- <button >+</button> -->
-        </div>
 
-        <div v-else="asideMenu.isSidebarOpen">
-          <Icon name="ep:plus"  @click="asideMenu.toggleSidebar()"/>
-           <!-- <button @click="asideMenu.toggleSidebar()">-</button> -->
+    <nav class=" mt-2 flex justify-center">
+      <div >
+        <div class="flex rounded-3xl  justify-start text-[8] ">
+          <div v-if="asideMenu.isSidebarOpen"  class="flex rounded-full border p-1">
+            <Icon name="ep:minus" @click="asideMenu.toggleSidebar()"/>
+           
+          </div>
+
+          <div v-else="asideMenu.isSidebarOpen" class="flex rounded-full border p-1">
+            <Icon name="ep:plus"  @click="asideMenu.toggleSidebar()" />
+     
+         </div>
         </div>
         
-        <aside-menu-item
+        <div class="border-r-2 border-grey pr-3">
+
+         
+          <aside-menu-item
           title="Домашня"
           path="/"
+          icon="ep:menu"
         />
+
+       
         <aside-menu-item
           title="Створити номенклатуру"
           path="/createNomenclature"
+          icon="ep:edit"
         />
+
+       
         <aside-menu-item
           title="Список номенклатур"
           path="/nomenclatures"
+          icon="ep:notebook"
         />
+        
+       
         <aside-menu-item
           title="Екземпляри"
           path="/items"
+          icon="ep:message-box"
         />
+
+       
         <aside-menu-item
           title="Видача"
           path="/giveOut"
+          icon="ep:takeaway-box"
         />
+
+       
         <aside-menu-item
           title="Користувачі"
           path="/users"
+          icon="ep:avatar"
         />
+
+        
         <aside-menu-item
           title="Вийти"
           path="/logout"
+          icon="ep:circle-close"
         />
         </div>
+      </div>
     </nav>
-  </div>
+  </aside>
 </template>
 
 <script setup lang="ts">
-import AsideMenuItem from './AsideMenuItem.vue';
+  import AsideMenuItem from './AsideMenuItem.vue';
 
   const asideMenu = useAsideMenuStore()
+  // const route = useRoute()
 
-  const isMounted = ref(false)
-
-  onMounted(() => {
-    isMounted.value = true
-  })
+  
+ 
 
 </script>
 
 <style lang="scss" scoped>
-.aside_container_menu {
-  max-width:  200px;
-  // background-color: grey;  
-  transition: width 1s ease;
-}
-.aside_container_menu.is-collapsed {
-  max-width: 90px;
-}
+  .sidebar-container {
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: width;
+  }
+  // СТан "Відкрито"
+  .sidebar-container[data-expander="true"]{
+    width: 16rem;
+  }
+  // СТан "Закрито"
+  .sidebar-container[data-expander="false"]{
+    width: 5rem;
+  }
+
+ 
+
+
 </style>
 

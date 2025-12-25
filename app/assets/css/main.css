@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+aside, aside * {
+
+    will-change:  width, transform;
+    user-select: none;
+}
