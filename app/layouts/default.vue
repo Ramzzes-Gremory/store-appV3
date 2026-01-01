@@ -1,15 +1,13 @@
 <template>
-    <div class="container flex min-h-screen">
-     
-      
-            <AsideMenuAside/>
-     
-       
-            <NuxtPage />
-        
+  <div class="flex">
+    <AsideMenuAside />
+
+    <div class="flex-1">
+      <NuxtPage />
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
- const asideMenu = useAsideMenuStore()
+const asideMenu = useAsideMenuStore()
 </script>
