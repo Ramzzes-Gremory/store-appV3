@@ -14,7 +14,11 @@ export default defineEventHandler(async (event) => {
 
     try {
         // перевірка токену нашим секретним ключем 
-        const decoded = jwt.verify(token, config.jwtSecret) as { userId: string }
+        const jwtSecret = config.jwtSecret
+        if (!jwtSecret) {
+            throw createError({ statusCode: 500, message: 'JWT Secret is not defined' })
+        }
+        const decoded = jwt.verify(token as string, jwtSecret) as unknown as { userId: string }
 
         return { valid: true, userId: decoded.userId }
     } catch (error) {

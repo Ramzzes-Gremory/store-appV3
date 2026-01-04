@@ -11,7 +11,7 @@ export default defineNuxtPlugin(() => {
 
     // Власний "розумний" завантажувач
     const api = $fetch.create({
-        baseURL: baseURL || 'http:/localhost:3000',
+        baseURL: baseURL || 'http://localhost:3000',
         onRequest({ options }) {
             options.headers = options.headers || {}
 

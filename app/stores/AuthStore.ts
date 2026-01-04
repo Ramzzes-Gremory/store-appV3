@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { jwtDecode } from 'jwt-decode'
 
 export const useAuthStore = defineStore('auth', () => {
     // кука для синхронізації сервера і клієнта

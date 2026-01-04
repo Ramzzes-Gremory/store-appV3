@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware((to) => {
+    const { $api } = useNuxtApp()
     const auth = useAuthStore()
 
     // якщо користувач не на сторінці логіну і немає токена - редирект
