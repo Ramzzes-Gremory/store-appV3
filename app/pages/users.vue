@@ -102,7 +102,7 @@
         <div class="mt-6">
           <UniversalBaseBtn text="Підтвердити" class="whitespace-nowrap font-thin" />
           <UniversalBaseBtn
-            @click="formVisible = false"
+            @click.prevent="cancel"
             text="Відмінити"
             class="whitespace-nowrap font-thin"
           />
@@ -143,14 +143,27 @@ const onSubmit = async () => {
   })
   formVisible.value = false
   await refreshNuxtData('users-list')
+  formData.value.name = ''
+  formData.value.department = ''
+  formData.value.login = ''
+  formData.value.password = ''
   triggerToast('Ви успішно СТВОРИЛИ користувача', 'success')
 }
+
+const cancel = () => {
+  formVisible.value = false
+  formData.value.name = ''
+  formData.value.department = ''
+  formData.value.login = ''
+  formData.value.password = ''
+}
+
 // Видалення користувача
 const deleteUser = async (id: string | number) => {
   const data = await $api(`/api/users/${id}`, {
     method: 'DELETE',
   })
   await refreshNuxtData('users-list')
-  triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
+  triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'error')
 }
 </script>

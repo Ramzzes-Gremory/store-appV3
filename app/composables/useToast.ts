@@ -4,13 +4,13 @@ export const useToast = () => {
     const action = useState('toast-action', () => '')
 
 
-    const triggerToast = (msg: string, action: string, duration = 5000) => {
+    const triggerToast = (msg: string, act: string, duration = 5000) => {
         show.value = false
-
 
         nextTick(() => {
             message.value = msg
             show.value = true
+            action.value = act
         })
 
 

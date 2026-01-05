@@ -16,7 +16,8 @@
       >
         <div class="flex items-center space-x-3">
           <span v-if="action !== 'error'" class="text-black font-bold">✔</span>
-          <span v-else class="text-white font-bold">✕</span>
+
+          <span v-else class="text-black font-bold">✕</span>
           <p class="text-sm font-medium">{{ message }}</p>
         </div>
 
