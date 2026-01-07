@@ -51,7 +51,8 @@ import BaseBtn from '~/components/Universal/BaseBtn.vue'
     async function handleLogin() {
         try{
             const {$api} = useNuxtApp()
-
+            // console.log(`Велью пассворда на логін вью`,password.value);
+            
             const data = await $api<any>('/api/login', {
                 method: 'POST',
                 body: {

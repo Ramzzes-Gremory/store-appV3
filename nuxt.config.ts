@@ -22,6 +22,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-06-19',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxt/icon'
-  ]
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxt/icon'],
+
 })

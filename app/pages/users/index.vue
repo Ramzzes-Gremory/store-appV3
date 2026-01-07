@@ -35,7 +35,8 @@
           <td>{{ user.department }}</td>
 
           <td class="flex justify-end gap-4">
-            <UniversalBaseIcon nameIcon="ep:edit-pen" />
+            <UniversalBaseIcon @click="editUser(user._id)" nameIcon="ep:edit-pen" />
+
             <UniversalBaseIcon
               @click="deleteUser(user._id)"
               nameIcon="ep:delete"
@@ -114,6 +115,7 @@
 
 <script setup lang="ts">
 const { $api } = useNuxtApp()
+const router = useRouter()
 const { data: allUsers, refresh } = await useAsyncData('users-list', () => $api('/api/users'))
 const searchStr = ref('')
 const formVisible = ref(false)
@@ -158,12 +160,16 @@ const cancel = () => {
   formData.value.password = ''
 }
 
+const editUser = async (id: string | number) => {
+  router.push(`/users/edit/${id}`)
+}
+
 // Видалення користувача
 const deleteUser = async (id: string | number) => {
   const data = await $api(`/api/users/${id}`, {
     method: 'DELETE',
   })
   await refreshNuxtData('users-list')
-  triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'error')
+  triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
 }
 </script>
