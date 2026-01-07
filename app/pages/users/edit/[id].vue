@@ -102,7 +102,6 @@ const loadUser = async () => {
     if (data) {
       user.value = data
       user.value.password = ''
-      console.log(`user.value FRONTEND`, user.value)
     }
   } catch (error: any) {
     triggerToast('Не вдалося завантажити дані', 'error')

@@ -16,9 +16,8 @@ export default defineEventHandler(async (event) => {
         }
 
         await User.deleteOne({ _id: id })
-        // res.json({ message: 'User was deleted' })
     } catch (error) {
-        // res.status(500).json(e)
+
         throw createError({ statusCode: 500, message: 'Помилка сервера' })
     }
 

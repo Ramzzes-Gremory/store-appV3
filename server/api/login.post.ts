@@ -20,27 +20,15 @@ export default defineEventHandler(async (event) => {
         })
 
     }
-    // console.log(candidate.password)
-    const isMatch = await bcrypt.compareSync(body.password, candidate.password)
-    console.log('Результат порівняння:', isMatch)
-    // порівняння паролів та чи існує користувач
-    console.log('Dva passworda cpmpare:');
-
-    console.log(body.password);
-    console.log(candidate.password);
-
     if (!candidate || !(await bcrypt.compare(body.password, candidate.password))) {
         throw createError({ statusCode: 401, message: 'Невірні дані' })
     }
-
     // створюємо токен
     const token = jwt.sign(
         { userId: candidate._id, department: candidate.department },
         config.jwtSecret,
         { expiresIn: '1d' }
     )
-
-
 
     return {
         token,
