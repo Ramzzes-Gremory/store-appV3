@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-7 mr-5">
+  <div class="">
     <table class="text-sm font-['Times-New-Roman'] w-full">
       <thead class="text-gray-400 border-b text-left">
         <tr class="font-thin">

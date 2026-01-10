@@ -2,7 +2,7 @@
   <div class="flex">
     <AsideMenuAside />
 
-    <div class="flex-1">
+    <div class="flex-1 mt-7 mr-5">
       <NuxtPage />
     </div>
   </div>
