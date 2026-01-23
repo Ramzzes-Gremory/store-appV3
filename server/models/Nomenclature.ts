@@ -15,11 +15,11 @@ const nomenclatureSchema = new Schema({
     },
     timeBlock: {
         created: {
-            type: String,
+            type: Date,
             required: false,
         },
         modified: {
-            type: String,
+            type: Date,
             required: false,
         },
     },

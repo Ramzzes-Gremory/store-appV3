@@ -3,7 +3,7 @@ import { Nomenclature } from '../models/Nomenclature'
 
 export default defineEventHandler(async (event) => {
     const body = await readMultipartFormData(event)
-    console.log('its from CreateNomenclature page: ', body);
+
 
 
     if (!body || !Array.isArray(body)) {
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
             group: fields.group,
             units: fields.units,
             comment: fields.comment,
-            source: fields.source, // конвертуємо рядок у boolean
+            source: fields.source || false, // конвертуємо рядок у boolean
             kit: fields.kit,
             imageUrl: savedImages, // Тепер це масив рядків
             timeBlock: {

@@ -213,7 +213,7 @@ const formData = ref({
   units: '',
   timeBlock: {
     created: new Date(),
-    modified: 'Not modified',
+    modified: new Date(),
   },
   source: '',
   kit: ['Одиниця'],
