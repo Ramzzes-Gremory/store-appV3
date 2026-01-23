@@ -271,7 +271,7 @@ const onSubmit = async function () {
   fd.append('units', formData.value.units)
 
   fd.append('timeBlock_created', formData.value.timeBlock.created.toISOString())
-  fd.append('timeBlock_modified', formData.value.timeBlock.modified)
+  fd.append('timeBlock_modified', formData.value.timeBlock.modified.toISOString())
   fd.append('source', formData.value.source)
   fd.append('kit', JSON.stringify(formData.value.kit))
   fd.append('comment', formData.value.comment)
@@ -300,7 +300,7 @@ const resetForm = function async() {
   formData.value.units = ''
   formData.value.timeBlock = {
     created: new Date(),
-    modified: 'Not modified',
+    modified: new Date(),
   }
   formData.value.source = ''
   formData.value.kit = ['Одиниця']

@@ -32,7 +32,17 @@
         <tr v-for="nomenclature in filteredNomenclatures" class="border-b">
           <td class="font-bold">{{ nomenclature.title }}</td>
           <td class="">{{ nomenclature.group }}</td>
-          <td>{{ nomenclature.timeBlock?.created }}</td>
+          <td>
+            {{
+              new Date(nomenclature.timeBlock?.created || 0).toLocaleString('uk-UA', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })
+            }}
+          </td>
           <td>{{ nomenclature.comment }}</td>
 
           <td class="flex flex-col items-end gap-2">
@@ -64,7 +74,6 @@ const { triggerToast } = useToast()
 const { $api } = useNuxtApp()
 const { ask } = useConfirm()
 
-// const router = useRouter()
 const { data: allNomenclatures, refresh } = await useAsyncData('nomenclatures-list', () =>
   $api('/api/nomenclatures'),
 )
