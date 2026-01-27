@@ -254,6 +254,7 @@ const handleFilesChange = (event: Event) => {
   })
   if (fileInput.value) fileInput.value.value = ''
 }
+
 const removeImage = (index: number) => {
   const image = images.value[index]
   if (image) {

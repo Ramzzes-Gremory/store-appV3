@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
 
     for (const item of body) {
         if (item.name === 'images' && item.filename) {
+            console.log(`its item ${item}`)
             const fileName = saveImageLocally(item)
             if (fileName) savedImages.push(fileName)
         } else if (item.name) {

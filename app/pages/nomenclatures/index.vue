@@ -32,17 +32,7 @@
         <tr v-for="nomenclature in filteredNomenclatures" class="border-b">
           <td class="font-bold">{{ nomenclature.title }}</td>
           <td class="">{{ nomenclature.group }}</td>
-          <td>
-            {{
-              new Date(nomenclature.timeBlock?.created || 0).toLocaleString('uk-UA', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-              })
-            }}
-          </td>
+          <td>{{ formatDate(nomenclature.timeBlock?.created) }}</td>
           <td>{{ nomenclature.comment }}</td>
 
           <td class="flex flex-col items-end gap-2">
@@ -71,8 +61,10 @@
 
 <script setup lang="ts">
 const { triggerToast } = useToast()
+const { formatDate } = useFormatter()
 const { $api } = useNuxtApp()
 const { ask } = useConfirm()
+const router = useRouter()
 
 const { data: allNomenclatures, refresh } = await useAsyncData('nomenclatures-list', () =>
   $api('/api/nomenclatures'),
@@ -99,18 +91,9 @@ const createItem = async (id: string | number) => {
   //   triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
 }
 const editNomenclature = async (id: string | number) => {
-  //   const data = await $api(`/api/users/${id}`, {
-  //     method: 'DELETE',
-  //   })
-  //   await refreshNuxtData('users-list')
-  //   triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
+  router.push(`/nomenclatures/edit/${id}`)
 }
 const deleteNomenclature = async (id: string | number) => {
-  //   const data = await $api(`/api/users/${id}`, {
-  //     method: 'DELETE',
-  //   })
-  //   await refreshNuxtData('users-list')
-  //   triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
   const confirmed = await ask('Ви точно хочете видалити?')
 
   if (confirmed) {

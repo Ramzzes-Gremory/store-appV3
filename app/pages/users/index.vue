@@ -82,6 +82,7 @@
             <option value="1zrdn">БУ та РЛР 1 зрдн</option>
             <option value="5zrbatr_2zrdn">5 зрбатр 2 зрдн</option>
             <option value="2zrdn">6 зрбатр 2 зрдн</option>
+            <option value="byrlr3zrdn">БУ РЛР 3 зрдн</option>
             <option value="1bpla">1 БпЛА ДпБпЛА</option>
             <option value="1dpbpla">БУ ДпБпЛА</option>
             <option value="GBY">ГБУ</option>
