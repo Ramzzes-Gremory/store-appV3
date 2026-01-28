@@ -77,7 +77,6 @@ export default defineEventHandler(async (event) => {
                 },
                 { new: true }
             )
-            console.log(updatedNomenclature);
 
             return { user: updatedNomenclature }
         } catch (err: any) {

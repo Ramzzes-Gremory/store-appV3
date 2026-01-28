@@ -28,13 +28,21 @@
       <fieldset class="mt-10 flex flex-col">
         <div>
           <legend>Попередні зображення:</legend>
-          <div class="flex my-5 gap-6">
+          <div class="flex my-5 gap-6 flex-wrap">
             <div
               v-for="(url, index) in nomenclature.imageUrl"
               :key="index"
-              class="border-2 rounded-md"
+              class="border-2 rounded-md relative group"
             >
               <img :src="'/' + url" alt="current image" class="object-cover w-36 h-36" />
+
+              <button
+                type="button"
+                @click="removeOldImage(index)"
+                class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                X
+              </button>
             </div>
           </div>
         </div>
@@ -154,22 +162,37 @@ const nomenclature = ref<NomenclatureData>({
   imageUrl: [''],
 })
 
-const loadNomenclature = async () => {
-  try {
-    const data = await useApi<NomenclatureData>(`/api/nomenclatures/edit/${nomenclatureId}`)
+const { data: serverData, refresh } = await useAsyncData<NomenclatureData>(
+  `nomenclature-${nomenclatureId}`,
+  () => $api(`/api/nomenclatures/edit/${nomenclatureId}`),
+)
 
-    if (data) {
-      nomenclature.value = data
-      tempTitle = data.title || ''
+watch(
+  serverData,
+  (newData) => {
+    if (newData) {
+      nomenclature.value = { ...newData }
+      tempTitle = newData.title || ''
     }
-  } catch (error: any) {
-    triggerToast('Не вдалося завантажити дані', 'error')
-  }
-}
+  },
+  { immediate: true },
+)
+// const loadNomenclature = async () => {
+//   try {
+//     const data = await useApi<NomenclatureData>(`/api/nomenclatures/edit/${nomenclatureId}`)
 
-onMounted(() => {
-  loadNomenclature()
-})
+//     if (data) {
+//       nomenclature.value = data
+//       tempTitle = data.title || ''
+//     }
+//   } catch (error: any) {
+//     triggerToast('Не вдалося завантажити дані', 'error')
+//   }
+// }
+
+// onMounted(() => {
+//   loadNomenclature()
+// })
 
 const handleFilesChange = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -194,6 +217,10 @@ const removeImage = (index: number) => {
   }
 }
 
+const removeOldImage = (index: number) => {
+  nomenclature.value.imageUrl.splice(index, 1)
+}
+
 const onSubmit = async function () {
   const updatedData = new FormData()
 
@@ -201,7 +228,7 @@ const onSubmit = async function () {
   updatedData.append('timeBlock_modified', new Date().toISOString())
   updatedData.append('comment', nomenclature.value.comment)
   // для старих
-  console.log(nomenclature.value.imageUrl)
+
   nomenclature.value.imageUrl.forEach((url) => {
     updatedData.append('old-images', url)
   })
@@ -219,7 +246,8 @@ const onSubmit = async function () {
     })
 
     triggerToast('Данні успішно оновлено', 'success')
-    // setTimeout(() => router.push('/users'), 2000)
+    newImages.value = []
+    await refresh()
   } catch (error) {
     triggerToast('Помилка при збережені', 'error')
   }
