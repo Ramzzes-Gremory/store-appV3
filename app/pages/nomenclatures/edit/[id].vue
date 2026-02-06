@@ -177,22 +177,6 @@ watch(
   },
   { immediate: true },
 )
-// const loadNomenclature = async () => {
-//   try {
-//     const data = await useApi<NomenclatureData>(`/api/nomenclatures/edit/${nomenclatureId}`)
-
-//     if (data) {
-//       nomenclature.value = data
-//       tempTitle = data.title || ''
-//     }
-//   } catch (error: any) {
-//     triggerToast('Не вдалося завантажити дані', 'error')
-//   }
-// }
-
-// onMounted(() => {
-//   loadNomenclature()
-// })
 
 const handleFilesChange = (event: Event) => {
   const target = event.target as HTMLInputElement

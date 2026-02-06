@@ -11,7 +11,6 @@ export default defineEventHandler(async (event) => {
 
     // запит до бази даних 
     const candidate = await User.findOne({ login: body.login.trim() })
-    console.log(`Кандидат: `, candidate)
     if (!candidate) {
         console.log('Користувача з таким логіном не знайдено');
         throw createError({

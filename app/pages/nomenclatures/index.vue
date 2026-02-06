@@ -83,16 +83,13 @@ const filteredNomenclatures = computed(() => {
 })
 
 const createItem = async (id: string | number) => {
-  //   const data = await $api(`/api/users/${id}`, {
-  console.log(id)
-  //     method: 'DELETE',
-  //   })
-  //   await refreshNuxtData('users-list')
-  //   triggerToast('Ви успішно ВИДАЛИЛИ користувача', 'success')
+  router.push(`/nomenclatures/createItems/${id}`)
 }
+
 const editNomenclature = async (id: string | number) => {
   router.push(`/nomenclatures/edit/${id}`)
 }
+
 const deleteNomenclature = async (id: string | number) => {
   const confirmed = await ask('Ви точно хочете видалити?')
 

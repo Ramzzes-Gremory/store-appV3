@@ -2,7 +2,7 @@ import { User } from '~~/server/models/User'
 
 export default defineEventHandler(async (event) => {
     try {
-        const users = await User.find().lean()
+        const users = await User.find().select('-password').lean()
 
         return users
     } catch (error) {
