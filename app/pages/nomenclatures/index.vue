@@ -53,6 +53,7 @@
               bg-color="bg-red-500"
             />
           </td>
+          <!-- <span>text</span> -->
         </tr>
       </tbody>
     </table>
