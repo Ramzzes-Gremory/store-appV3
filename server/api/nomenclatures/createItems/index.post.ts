@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
     try {
         const createdItems = await Item.insertMany(body)
-        return 'ok'
+        return createdItems
     } catch (e) {
         console.error(e)
         throw createError({ statusCode: 500, statusMessage: 'Шось не збереглось' })

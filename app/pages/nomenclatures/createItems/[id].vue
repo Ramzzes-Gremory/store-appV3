@@ -378,15 +378,35 @@ const handleUserChange = function () {
 }
 const onSubmit = async function () {
   // console.log(cards.value)
-  const data = await $api(`/api/nomenclatures/createItems/`, {
+  const createdItems = await $api(`/api/nomenclatures/createItems/`, {
     method: 'POST',
     body: cards.value,
   })
 
+  const incomeLog = {
+    reason: 'income',
+    owner: {
+      id: selectedUser.value?._id,
+      name: selectedUser.value?.name,
+    },
+    dateOfTakeOut: '',
+    comment: '',
+    items: createdItems,
+    dateArrival: new Date(),
+  }
+
+  const createIncomeLog = await $api('/api/nomenclatures/createItems/createLog/', {
+    method: 'POST',
+    body: incomeLog,
+  })
+
   // якщо все ок сервер повертає повідомлення "ok"
-  if (data === 'ok') {
-    triggerToast('Ви успішно створили екземпляр(и)', 'success')
+  if (createdItems) {
+    if (createIncomeLog) {
+      triggerToast('Ви успішно створили НОВИЙ ЗАПИС та ЕКЗЕМПЛЯР(И)', 'success')
+    } else triggerToast('Помилка створення НОВОГО ЗАПИСУ', 'error')
+
     router.push(`/nomenclatures/`)
-  } else console.log('its NOT OK!!!')
+  } else triggerToast('Помилка створення НОВОГО ЕКЗЕМПЛЯРУ', 'error')
 }
 </script>
