@@ -185,7 +185,7 @@ const selectedItem = ref({
 const { data: items, refresh } = await useAsyncData('items-list', () => $api('/api/items'))
 
 const editItem = function (id: string) {
-  console.log(id)
+  router.push(`/items/edit/${id}`)
 }
 const deleteItem = async function (item: Item) {
   const confirmed = await ask('Впевнені, в списанні екземпляру?')
@@ -206,17 +206,24 @@ const writingOff = async function (id: string) {
   try {
     const dataToUpdateItem = {
       status: 'Written-off',
-      dateOfWrittingOff: new Date(),
+      dateOfWritingOff: new Date(),
       comment: log.value.comment,
       _id: selectedItem.value._id,
+      owner: {
+        id: selectedItem.value.owner.id,
+        name: selectedItem.value.owner.name,
+      },
+      reason: log.value.reason,
     }
 
     const data = await $api(`/api/items/write-off/`, {
       method: 'PATCH',
       body: dataToUpdateItem,
     })
+
     await refreshNuxtData('items-list')
     triggerToast('Ви успішно СПИСАЛИ екземпляр', 'success')
+    showWritingBlock.value = false
   } catch (e) {
     triggerToast('Помилка СПИСАННЯ екземпляру', 'error')
     console.error(e)
